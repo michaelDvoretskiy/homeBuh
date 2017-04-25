@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("\login", name="login")
+     * @Route("/login", name="login")
      * @Template()
      */
     public function showLoginAction()
@@ -21,5 +21,17 @@ class UserController extends Controller
             LoginForm::class
         );
         return ['form' => $form->createView() ];
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/")
+     */
+    public function getStartedAction()
+    {
+        if ($this->getUser()) {
+            return $this->redirectToRoute("account");
+        }
+        return $this->redirectToRoute("login");
     }
 }
