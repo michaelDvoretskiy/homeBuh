@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name=viewport content="width=480">
+        <meta http-equiv="Cache-control" content="no-cache">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="-1">
+
+        {% block css_block %}
+            <link rel="stylesheet" type="text/css" href={{ asset("bundles/homebuh/css/page.css") }}>
+            <link rel="stylesheet" type="text/css" href={{ asset("bundles/homebuh/css/menu.css") }}>
+            <link rel="stylesheet" type="text/css" href={{ asset("bundles/homebuh/css/form.css") }}>
+        {% endblock %}
+
+        {% block js_pre_block %}
+            <script type="text/javascript" src = {{ asset("bundles/homebuh/js/jquery.js") }}></script>
+            <script type="text/javascript" src = {{ asset("bundles/homebuh/js/general.js") }}></script>
+            <script type="text/javascript" src = {{ asset("bundles/homebuh/js/requests.js") }}></script>
+        {% endblock %}
+        <title>Home accountant</title>
+    </head>
+
+    <body>
+        {% block header_block %}
+            <header>
+                <img src={{ asset("bundles/homebuh/img/bg4.gif") }}>
+                <div class="table">
+                    <div class = "cell">Home<br>accountant</div>
+                </div>
+            </header>
+        {% endblock %}
+        {% block top_menu_block %}
+            <nav class = "main"></nav>
+            <nav class = "dependent"></nav>
+        {% endblock %}
+        {% block content_block %}
+            <section class = "main" id = "sectionMain">
+                <div id = "message"></div>
+                <div id = "devMessage" hidden="hidden"></div>
+            </section>
+        {% endblock %}
+        {% block footer_block %}
+            <footer>
+                <p>Developed by <a href="mailto:m.dvoretskiy@gmail.com">m.dvoretskiy@gmail.com</a><br/>
+                    &copy Mikhail Dvoretskyi</p>
+            </footer>
+        {% endblock %}
+    </body>
+</html>

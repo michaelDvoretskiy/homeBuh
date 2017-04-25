@@ -1,0 +1,74 @@
+body {	
+	margin: 0px;
+	padding: 0px;
+	background-color: #f0f0f0;
+	min-width: 450px;
+	max-width: 650px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
+}
+header {
+	height: 100px;
+}
+header img {
+	float: left;
+	height: 100%;
+}
+header > div {
+	height: 100%;
+}
+div.table { 
+	display: table;	
+}
+header div.table {
+	height: 100%;
+	text-align: right;
+	float: right;
+	margin-right: 20px;
+}
+div.cell {
+	display: table-cell;
+}
+header div.cell {	
+	vertical-align: middle;
+	height: 100%;	
+	font-size: 32px;
+	font-weight: bold;
+	font-family: Courier, "Courier New", sans-serif;
+	width: 100%;
+}
+header, footer, nav {
+	background-color: #cad4ef;	
+	color: #3c4b71;
+}
+div#message {
+	height: 30px;
+}
+section.main {	
+	background-image: url("../img/bg2.gif");
+	min-height: 200px;
+}
+header, footer, section.main {
+	margin: 10px;
+}
+footer {
+	text-align: center;
+	padding: 0px;
+}
+div.tableView {
+	display: table;
+	width: 100%;
+}
+div.rowView {
+	display: table-row;
+}
+div.cellView {
+	display: table-cell;
+	vertical-align: middle;
+}
+div.lastRowView {
+	display: table-caption;	
+	caption-side: bottom; 
+	text-align: center;
+}

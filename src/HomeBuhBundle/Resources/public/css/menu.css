@@ -1,0 +1,36 @@
+nav {
+	margin: 0px 10px 5px 10px;
+}
+nav ul {
+    margin: 0px;	
+	list-style-type: none;
+	padding: 15px 0px;
+    position: relative;
+}
+nav ul li {
+	display: inline;
+	padding: 15px 15px;
+    color: #3c4b71;    
+}
+nav.main ul li {
+    font-size: 150%;
+}
+nav.dependent ul {
+    padding: 5px 0px;
+}
+nav.dependent  ul li {
+    padding: 5px 15px;
+}
+nav ul li#mnuLogout {
+    display: block;
+    position: absolute; /* блок занимает ширину содержимого, max-width её ограничивает */
+    top: 0; /* прикрепить к верху родителя */
+    right: 0;
+}
+nav ul li:hover {
+    background-color: #7f9dee;
+}
+nav ul li.active {
+    background-color: #1550f1;
+    color: white;
+}

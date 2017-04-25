@@ -1,0 +1,100 @@
+form {	
+	text-align: center;
+	margin: 30px 10px;
+	margin-top: 10px;
+}
+
+input, select {
+	margin: 10px;
+	width: 250px;
+	font-size: 160%;
+	border: solid #3c4b71 2px;
+	margin: 15px 5px;
+	border-radius: 5px;
+	padding: 8px 3px;
+}
+input[type = number] {
+	text-align: center;	
+}
+input[type = button] {
+	font-size: 200%;	
+	padding: 25px 5px;
+}
+form#editCat input[type = button] {
+	font-size: 150%;	
+	padding: 5px 5px;
+	width: 50px;
+}
+form#editCat input[type = text] {	
+	width: 200px;
+	font-size: 120%;
+}
+form#editCat input[type = number] {	
+	width: 50px;
+	font-size: 120%;
+}
+form div.rowView label {
+	font-size: 120%;
+	display: block;
+	text-align: right;
+	color: #3c4b71;
+	font-weight: 600;
+}
+form table {
+	width: 100%;
+	border-collapse: collapse;
+}
+form table th {
+	font-size: 120%;
+	border: solid 1px white;
+	padding: 8px 5px;
+	background-color: #3c4b71
+} 
+form table#viewTable tr:nth-child(odd) {
+	background-color: skyblue;
+}
+form table#viewTable tr:nth-child(even) {
+	background-color: #cad4ef;
+}
+form table#repTable > tbody > tr:nth-child(4n+1) {
+	background-color: skyblue;
+}
+form table#repTable > tbody > tr:nth-child(4n+3) {
+	background-color: #cad4ef;
+}
+form table td {
+	border: solid 1px #3c4b71;
+	color: #3c4b71;
+	padding: 8px 3px;
+	font-family: sans-serif;
+} 
+form table#viewTable tr.row:hover td, form table#repTable > tbody > tr.row:hover td{
+	background-color: #1550f1;	
+	color: white;
+	border-color: white;	
+}
+form table#viewTable tr.row:hover td.del:hover {
+	background-color: #DC143C;
+	color: white;
+	font-weight: bold;
+	padding: 0px;
+}
+form table#repTable tr.row:hover td.drillDown:hover {
+	background-color: yellow;
+	color: #3c4b71;
+	font-weight: bold;
+	border: solid 1px #3c4b71;
+}
+form table td.innerTable {
+	padding: 15px 30px;
+}
+form table#repTable td.innerTable table.inner {
+	font-size: 70%;
+	border: solid 1px white;
+	color: black;
+}
+form table#repTable td.innerTable table.inner td {
+	background-color: none;	
+	font-weight: bold;
+	color: black;	
+}
