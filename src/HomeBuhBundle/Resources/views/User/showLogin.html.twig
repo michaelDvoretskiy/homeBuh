@@ -1,6 +1,35 @@
 {% extends '@HomeBuh/layout.html.twig' %}
 {% block content_block %}
     {{ form_start(form, {'attr': {'class': 'my-form-class'} }) }}
-        {{ form_widget(form) }}
+
+    <div class = "tableView">
+        <div class = "rowView">
+            <div class = "cellView">
+                {{ form_label(form.userName) }}
+            </div>
+            <div class = "cellView">
+                {{ form_widget(form.userName) }}
+            </div>
+        </div>
+        <div class = "rowView">
+            <div class = "cellView">
+                {{ form_label(form.passWord) }}
+            </div>
+            <div class = "cellView">
+                {{ form_widget(form.passWord) }}
+            </div>
+        </div>
+        <div class = "lastRowView">
+            {{ form_widget(form.login) }}
+        </div>
+    </div>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block js_after_block %}
+    {#<script !src="">#}
+        {#$('#{{ form.login.vars['id'] }}').click(function() {#}
+
+        {#});#}
+    {#</script>#}
 {% endblock %}

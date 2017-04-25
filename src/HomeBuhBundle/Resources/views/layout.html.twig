@@ -34,17 +34,20 @@
             <nav class = "main"></nav>
             <nav class = "dependent"></nav>
         {% endblock %}
+        <section class = "main" id = "sectionMain">
+        <div id = "message"></div>
+        <div id = "devMessage" hidden="hidden"></div>
         {% block content_block %}
-            <section class = "main" id = "sectionMain">
-                <div id = "message"></div>
-                <div id = "devMessage" hidden="hidden"></div>
-            </section>
         {% endblock %}
+        </section>
         {% block footer_block %}
             <footer>
                 <p>Developed by <a href="mailto:m.dvoretskiy@gmail.com">m.dvoretskiy@gmail.com</a><br/>
                     &copy Mikhail Dvoretskyi</p>
             </footer>
+        {% endblock %}
+
+        {% block js_after_block %}
         {% endblock %}
     </body>
 </html>
