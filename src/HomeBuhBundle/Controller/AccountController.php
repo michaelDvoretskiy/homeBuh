@@ -14,7 +14,7 @@ class AccountController extends Controller
      */
     public function indexAction()
     {
-        return new Response("111");
-        //return $this->render('@HomeBuh/layout.html.twig');
+        //return new Response("111");
+        return $this->render('@HomeBuh/layout.html.twig');
     }
 }

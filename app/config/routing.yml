@@ -2,3 +2,5 @@ home_buh:
     resource: "@HomeBuhBundle/Controller/"
     type:     annotation
     prefix:   /
+logout:
+    path: /logout

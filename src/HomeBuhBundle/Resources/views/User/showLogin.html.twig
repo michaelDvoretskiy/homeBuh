@@ -3,10 +3,9 @@
 
     {% if err %}
         <div>{{ err.messageKey|trans(err.messageData, 'security') }}</div>
-        {{ dump(err) }}
     {% endif %}
 
-    {{ form_start(form, {'attr': {'class': 'my-form-class'} }) }}
+    {{ form_start(form) }}
 
     <div class = "tableView">
         <div class = "rowView">
@@ -14,7 +13,7 @@
                 {{ form_label(form.username) }}
             </div>
             <div class = "cellView">
-                {{ form_widget(form.username) }}
+                {{ form_widget(form.username, {'attr': {'value': last_username }}) }}
             </div>
         </div>
         <div class = "rowView">
