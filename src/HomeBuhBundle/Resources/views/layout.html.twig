@@ -16,7 +16,6 @@
         {% block js_pre_block %}
             <script type="text/javascript" src = {{ asset("bundles/homebuh/js/jquery.js") }}></script>
             <script type="text/javascript" src = {{ asset("bundles/homebuh/js/general.js") }}></script>
-            <script type="text/javascript" src = {{ asset("bundles/homebuh/js/requests.js") }}></script>
         {% endblock %}
         <title>Home accountant</title>
     </head>
@@ -30,13 +29,12 @@
                 </div>
             </header>
         {% endblock %}
-        {% block top_menu_block %}
-            <nav class = "main"></nav>
-            <nav class = "dependent"></nav>
-        {% endblock %}
+
+        {% block main_menu_block %}{% endblock %}
+        {% block dep_menu_block %}{% endblock %}
+
         <section class = "main" id = "sectionMain">
         <div id = "message"></div>
-        <div id = "devMessage" hidden="hidden"></div>
         {% block content_block %}
         {% endblock %}
         </section>

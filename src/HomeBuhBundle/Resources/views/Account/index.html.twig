@@ -1,0 +1,13 @@
+{% extends "@HomeBuh/layout.html.twig" %}
+
+{% block main_menu_block %}
+    {% include "@HomeBuh/Account/mainMenu.html.twig" %}
+{% endblock %}
+
+{% block dep_menu_block %}
+    {% include "@HomeBuh/Account/depMenu.html.twig" %}
+{% endblock %}
+
+{% block js_after_block %}
+    <script src="{{ asset("bundles/homebuh/js/menu.js") }}"></script>
+{% endblock %}
