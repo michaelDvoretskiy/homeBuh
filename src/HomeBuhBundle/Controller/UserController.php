@@ -4,6 +4,7 @@ namespace HomeBuhBundle\Controller;
 
 use HomeBuhBundle\Entity\Users;
 use HomeBuhBundle\Form\LoginForm;
+use HomeBuhBundle\Utils\UserUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,7 +15,7 @@ class UserController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/auth", name = "auth")
+     * @Route("/auth_old", name = "auth_old")
      */
     public function authAction(Request $request)
     {
@@ -28,22 +29,22 @@ class UserController extends Controller
             dump($dbUserRow);
             return new Response();
         }
-        return $this->redirectToRoute("login");
+        return $this->redirectToRoute("login_old");
     }
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/")
+     * @Route("/old")
      */
     public function getStartedAction()
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute("account");
+            return $this->redirectToRoute("account_old");
         }
-        return $this->redirectToRoute("login");
+        return $this->redirectToRoute("login_old");
     }
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/login", name="login")
+     * @Route("/login_old", name="login_old")
      * @Template()
      */
     public function showLoginAction()
@@ -52,9 +53,46 @@ class UserController extends Controller
             LoginForm::class,
             null,
             [
-                'action' => $this->generateUrl("auth")
+                'action' => $this->generateUrl("auth_old")
             ]
         );
         return ['form' => $form->createView()];
+    }
+
+    /**
+     * @Route("login", name = "login")
+     * @Template("@HomeBuh/User/login.html.twig")
+     */
+    public function loginAction()
+    {
+        $auth = $this->get("security.authentication_utils");
+        return [
+            //"form" => $this->createForm(LoginForm::class,null,["method" => "POST"])->createView(),
+            "last_username" => $auth->getLastUsername(),
+            "error" => $auth->getLastAuthenticationError(),
+        ];
+    }
+
+    /**
+     * @return Response
+     * @Route("admin/temp", name = "temp_admin")
+     */
+    public function tempAdminAction()
+    {
+        return new Response("<html><body>admin</body></html>");
+    }
+    
+    /**
+     * @return Response
+     * @Route("add_admin", name = "add_admin")
+     */
+    public function tempAddUserAction()
+    {
+        $User = (new UserUtil($this->container))->createUser("admin", 1111, "admin@mail.homebuh");
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($User);
+        $em->flush();
+
+        return new Response("Successfully added");
     }
 }

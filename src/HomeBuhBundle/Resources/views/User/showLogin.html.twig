@@ -1,22 +1,28 @@
 {% extends '@HomeBuh/layout.html.twig' %}
 {% block content_block %}
+
+    {% if err %}
+        <div>{{ err.messageKey|trans(err.messageData, 'security') }}</div>
+        {{ dump(err) }}
+    {% endif %}
+
     {{ form_start(form, {'attr': {'class': 'my-form-class'} }) }}
 
     <div class = "tableView">
         <div class = "rowView">
             <div class = "cellView">
-                {{ form_label(form.userName) }}
+                {{ form_label(form.username) }}
             </div>
             <div class = "cellView">
-                {{ form_widget(form.userName) }}
+                {{ form_widget(form.username) }}
             </div>
         </div>
         <div class = "rowView">
             <div class = "cellView">
-                {{ form_label(form.passWord) }}
+                {{ form_label(form.password) }}
             </div>
             <div class = "cellView">
-                {{ form_widget(form.passWord) }}
+                {{ form_widget(form.password) }}
             </div>
         </div>
         <div class = "lastRowView">

@@ -15,16 +15,17 @@ class LoginForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('userName',
+            ->add('username',
                 TextType::class,
                 [
-                    'property_path' => 'name',
-                    'label' => 'Username'
+                    'property_path' => 'username',
+                    'label' => 'Username',
                 ])
-            ->add('passWord',
+            ->add('password',
                 PasswordType::class,
                 [
-                    'label' => 'Password'
+                    'property_path' => 'password',
+                    'label' => 'Password',
                 ])
             ->add('login',
                 SubmitType::class);
@@ -32,11 +33,11 @@ class LoginForm extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        
     }
 
     public function getBlockPrefix()
     {
-        return 'home_buh_bundle_login_form';
+        return 'login';
     }
 }
