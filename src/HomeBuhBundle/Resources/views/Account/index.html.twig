@@ -8,6 +8,10 @@
     {% include "@HomeBuh/Account/depMenu.html.twig" %}
 {% endblock %}
 
+{% block content_block %}
+    {{ render(path("get_content", {'activeMenu': activeMenu})) }}
+{% endblock %}
+
 {% block js_after_block %}
     <script src="{{ asset("bundles/homebuh/js/menu.js") }}"></script>
 {% endblock %}

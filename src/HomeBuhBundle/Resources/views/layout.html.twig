@@ -15,6 +15,10 @@
 
         {% block js_pre_block %}
             <script type="text/javascript" src = {{ asset("bundles/homebuh/js/jquery.js") }}></script>
+
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
             <script type="text/javascript" src = {{ asset("bundles/homebuh/js/general.js") }}></script>
         {% endblock %}
         <title>Home accountant</title>
@@ -34,10 +38,11 @@
         {% block dep_menu_block %}{% endblock %}
 
         <section class = "main" id = "sectionMain">
-        <div id = "message"></div>
-        {% block content_block %}
-        {% endblock %}
+            <div id = "message"></div>
+            {% block content_block %}
+            {% endblock %}
         </section>
+
         {% block footer_block %}
             <footer>
                 <p>Developed by <a href="mailto:m.dvoretskiy@gmail.com">m.dvoretskiy@gmail.com</a><br/>
