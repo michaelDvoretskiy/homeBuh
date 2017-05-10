@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="expenses", indexes={@ORM\Index(name="account", columns={"account"}), @ORM\Index(name="cat", columns={"cat"})})
  * @ORM\Entity
  */
-class Expenses
+class Expense
 {
     /**
      * @var \DateTime
@@ -50,9 +50,9 @@ class Expenses
     private $id;
 
     /**
-     * @var \HomeBuhBundle\Entity\Accounts
+     * @var \HomeBuhBundle\Entity\Account
      *
-     * @ORM\ManyToOne(targetEntity="HomeBuhBundle\Entity\Accounts")
+     * @ORM\ManyToOne(targetEntity="Account.php")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="account", referencedColumnName="id")
      * })
@@ -60,9 +60,9 @@ class Expenses
     private $account;
 
     /**
-     * @var \HomeBuhBundle\Entity\Categories
+     * @var \HomeBuhBundle\Entity\Category
      *
-     * @ORM\ManyToOne(targetEntity="HomeBuhBundle\Entity\Categories")
+     * @ORM\ManyToOne(targetEntity="Category.php")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cat", referencedColumnName="id")
      * })
@@ -75,7 +75,7 @@ class Expenses
      * Set data
      *
      * @param \DateTime $data
-     * @return Expenses
+     * @return Expense
      */
     public function setData($data)
     {
@@ -98,7 +98,7 @@ class Expenses
      * Set text
      *
      * @param string $text
-     * @return Expenses
+     * @return Expense
      */
     public function setText($text)
     {
@@ -121,7 +121,7 @@ class Expenses
      * Set summa
      *
      * @param integer $summa
-     * @return Expenses
+     * @return Expense
      */
     public function setSumma($summa)
     {
@@ -144,7 +144,7 @@ class Expenses
      * Set uid
      *
      * @param integer $uid
-     * @return Expenses
+     * @return Expense
      */
     public function setUid($uid)
     {
@@ -176,10 +176,10 @@ class Expenses
     /**
      * Set account
      *
-     * @param \HomeBuhBundle\Entity\Accounts $account
-     * @return Expenses
+     * @param \HomeBuhBundle\Entity\Account $account
+     * @return Expense
      */
-    public function setAccount(\HomeBuhBundle\Entity\Accounts $account = null)
+    public function setAccount(\HomeBuhBundle\Entity\Account $account = null)
     {
         $this->account = $account;
 
@@ -189,7 +189,7 @@ class Expenses
     /**
      * Get account
      *
-     * @return \HomeBuhBundle\Entity\Accounts 
+     * @return \HomeBuhBundle\Entity\Account 
      */
     public function getAccount()
     {
@@ -199,10 +199,10 @@ class Expenses
     /**
      * Set cat
      *
-     * @param \HomeBuhBundle\Entity\Categories $cat
-     * @return Expenses
+     * @param \HomeBuhBundle\Entity\Category $cat
+     * @return Expense
      */
-    public function setCat(\HomeBuhBundle\Entity\Categories $cat = null)
+    public function setCat(\HomeBuhBundle\Entity\Category $cat = null)
     {
         $this->cat = $cat;
 
@@ -212,7 +212,7 @@ class Expenses
     /**
      * Get cat
      *
-     * @return \HomeBuhBundle\Entity\Categories 
+     * @return \HomeBuhBundle\Entity\Category 
      */
     public function getCat()
     {

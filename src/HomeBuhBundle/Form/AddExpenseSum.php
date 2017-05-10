@@ -5,7 +5,9 @@ namespace HomeBuhBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,6 +34,31 @@ class AddExpenseSum extends AbstractType
                 ]
             )
             ->add(
+                "sum",
+                NumberType::class,
+                [
+                    'label' => 'Sum: ',
+                    'attr' => [
+                        ''
+                    ],
+                ]
+            )
+            ->add(
+                "comment",
+                TextType::class,
+                [
+                    'label' => 'Comment: ',
+                ]
+            )
+            ->add(
+                "type",
+                ChoiceType::class,
+                [
+                    'label' => 'Type:',
+                    'choices' => $options['acctypes'],
+                ]
+            )
+            ->add(
                 "add",
                 SubmitType::class
             );
@@ -42,6 +69,7 @@ class AddExpenseSum extends AbstractType
         $resolver->setDefaults(
             [
                 'categories' => [],
+                'acctypes' => [],
             ]
         );
     }

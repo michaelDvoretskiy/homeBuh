@@ -3,6 +3,7 @@
 namespace HomeBuhBundle\Controller;
 
 use HomeBuhBundle\Form\AddExpenseSum;
+use HomeBuhBundle\Utils\UserUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,13 +13,13 @@ class AccountController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/", name = "account")
+     * @Route("/{activeMenu}", name = "account")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction($activeMenu = 'mnuAdd')
     {
         return [
-            'activeMenu' => 'mnuAdd',
+            'activeMenu' => $activeMenu,
         ];
     }
     /**
@@ -57,11 +58,17 @@ class AccountController extends Controller
      */
     public function addExpenseAction()
     {
-        $categories = [
-            '0' => 'Base category',
-            '1' => 'Additional one',
-        ];
-        $form = $this->createForm(AddExpenseSum::class, null, ['categories' => $categories]);
+        $categories = UserUtil::getUserCategoriesForChoice($this->container, $this->getUser());
+        $paymentTypes = UserUtil::getUserPaymentTypesForChoice($this->container, $this->getUser());
+            
+        $form = $this->createForm(
+            AddExpenseSum::class,
+            null,
+            [
+                'categories' => $categories,
+                'acctypes' => $paymentTypes,
+            ]
+        );
         return [
             'form' => $form->createView(),
         ];

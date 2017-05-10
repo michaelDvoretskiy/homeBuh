@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function tempAddUserAction()
     {
-        $User = (new UserUtil($this->container))->createUser("admin", 1111, "admin@mail.homebuh");
+        $User = UserUtil::createUser($this->container, "admin", 1111, "admin@mail.homebuh");
         $em = $this->getDoctrine()->getManager();
         $em->persist($User);
         $em->flush();

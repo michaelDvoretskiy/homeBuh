@@ -5,19 +5,26 @@ namespace HomeBuhBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Accounts
+ * Categories
  *
- * @ORM\Table(name="accounts")
- * @ORM\Entity
+ * @ORM\Table(name="categories")
+ * @ORM\Entity(repositoryClass="CategoryRepository")
  */
-class Accounts
+class Categories
 {
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
      */
     private $name;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ord", type="boolean", nullable=false)
+     */
+    private $ord;
 
     /**
      * @var integer
@@ -41,7 +48,7 @@ class Accounts
      * Set name
      *
      * @param string $name
-     * @return Accounts
+     * @return Categories
      */
     public function setName($name)
     {
@@ -61,10 +68,33 @@ class Accounts
     }
 
     /**
+     * Set ord
+     *
+     * @param boolean $ord
+     * @return Categories
+     */
+    public function setOrd($ord)
+    {
+        $this->ord = $ord;
+
+        return $this;
+    }
+
+    /**
+     * Get ord
+     *
+     * @return boolean 
+     */
+    public function getOrd()
+    {
+        return $this->ord;
+    }
+
+    /**
      * Set uid
      *
      * @param integer $uid
-     * @return Accounts
+     * @return Categories
      */
     public function setUid($uid)
     {

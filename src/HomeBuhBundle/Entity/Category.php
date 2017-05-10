@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Categories
  *
  * @ORM\Table(name="categories")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CategoryRepository")
  */
-class Categories
+class Category
 {
     /**
      * @var string
@@ -48,7 +48,7 @@ class Categories
      * Set name
      *
      * @param string $name
-     * @return Categories
+     * @return Category
      */
     public function setName($name)
     {
@@ -71,7 +71,7 @@ class Categories
      * Set ord
      *
      * @param boolean $ord
-     * @return Categories
+     * @return Category
      */
     public function setOrd($ord)
     {
@@ -94,7 +94,7 @@ class Categories
      * Set uid
      *
      * @param integer $uid
-     * @return Categories
+     * @return Category
      */
     public function setUid($uid)
     {

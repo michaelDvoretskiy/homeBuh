@@ -1,3 +1,49 @@
 {{ form_start(form) }}
-{{ form_widget(form) }}
+
+<div class = "tableView">
+    <div class = "rowView">
+        <div class = "cellView">
+            {{ form_label(form.date) }}
+        </div>
+        <div class = "cellView">
+            {{ form_widget(form.date) }}
+        </div>
+    </div>
+    <div class = "rowView">
+        <div class = "cellView">
+            {{ form_label(form.category) }}
+        </div>
+        <div class = "cellView">
+            {{ form_widget(form.category) }}
+        </div>
+    </div>
+    <div class = "rowView">
+        <div class = "cellView">
+            {{ form_label(form.sum) }}
+        </div>
+        <div class = "cellView">
+            {{ form_widget(form.sum) }}
+        </div>
+    </div>
+    <div class = "rowView">
+        <div class = "cellView">
+            {{ form_label(form.comment) }}
+        </div>
+        <div class = "cellView">
+            {{ form_widget(form.comment) }}
+        </div>
+    </div>
+    <div class = "rowView">
+        <div class = "cellView">
+            {{ form_label(form.type) }}
+        </div>
+        <div class = "cellView">
+            {{ form_widget(form.type) }}
+        </div>
+    </div>
+    <div class = "lastRowView">
+        {{ form_widget(form.add) }}
+    </div>
+</div>
+
 {{ form_end(form) }}
