@@ -1,49 +1,23 @@
-{{ form_start(form) }}
+{% import "@HomeBuh/formElements.html.twig" as forms %}
 
+{{ forms.my_form_begin(form) }}
 <div class = "tableView">
-    <div class = "rowView">
-        <div class = "cellView">
-            {{ form_label(form.date) }}
-        </div>
-        <div class = "cellView">
-            {{ form_widget(form.date) }}
-        </div>
-    </div>
-    <div class = "rowView">
-        <div class = "cellView">
-            {{ form_label(form.category) }}
-        </div>
-        <div class = "cellView">
-            {{ form_widget(form.category) }}
-        </div>
-    </div>
-    <div class = "rowView">
-        <div class = "cellView">
-            {{ form_label(form.sum) }}
-        </div>
-        <div class = "cellView">
-            {{ form_widget(form.sum) }}
-        </div>
-    </div>
-    <div class = "rowView">
-        <div class = "cellView">
-            {{ form_label(form.comment) }}
-        </div>
-        <div class = "cellView">
-            {{ form_widget(form.comment) }}
-        </div>
-    </div>
-    <div class = "rowView">
-        <div class = "cellView">
-            {{ form_label(form.type) }}
-        </div>
-        <div class = "cellView">
-            {{ form_widget(form.type) }}
-        </div>
-    </div>
-    <div class = "lastRowView">
-        {{ form_widget(form.add) }}
-    </div>
-</div>
+    {{ forms.my_form_row(form.date) }}
+    {{ forms.my_form_row(form.category) }}
+    {{ forms.my_form_row(form.summa) }}
+    {{ forms.my_form_row(form.comment) }}
+    {{ forms.my_form_row(form.type) }}
 
-{{ form_end(form) }}
+    {{ forms.my_form_submit_btn(form.add) }}
+</div>
+{{ forms.my_form_end(form) }}
+
+<script !src="">
+    function initElements() {
+        var now = new Date();
+        $('#add_expense_sum_date').val(now.myFormat());
+    }
+    $( window ).on( "load", function() {
+        initElements();
+    });
+</script>

@@ -1,0 +1,55 @@
+{% import "@HomeBuh/formElements.html.twig" as forms %}
+
+{{ forms.my_form_begin(form) }}
+<div class = "tableView">
+    {{ forms.my_form_row(form.beginDate) }}
+    {{ forms.my_form_row(form.endDate) }}
+
+    {{ forms.my_form_submit_btn(form.view) }}
+</div>
+
+<table id = "viewTable">
+    <thead>
+    <th>Category</th>
+    <th>Account</th>
+    <th>Comment</th>
+    <th>Sum</th>
+    </thead>
+    <tbody></tbody>
+</table>
+
+{{ forms.my_form_end(form) }}
+
+
+<script !src="">
+    function initElements() {
+        var now = new Date();
+        $('#show_expenses_form_beginDate').val(now.myMonthBeg().myFormat());
+        $('#show_expenses_form_endDate').val(now.myMonthEnd().myFormat());
+    }
+    $( window ).on( "load", function() {
+        initElements();
+    });
+
+    var tableRowDelClick = function() {
+        if (confirm("Delete this row ?")) {
+            var elTableRow = this;
+            doTheThing(function(data) {
+                if (data) {
+                    $(elTableRow).parent().remove();
+                }
+            }, "remove_expense", {"expence_id": $(elTableRow).attr('dbrowid')});
+        }
+    };
+    $('button#show_expenses_form_view').click(function() {
+        var elTableBody = $('table#viewTable > tbody');
+        elTableBody.html("");
+        var requestParams = {
+            "datefrom": $('input#show_expenses_form_beginDate').val(),
+            "dateto": $('input#show_expenses_form_endDate').val()
+        };
+        fillElement(elTableBody, function(){
+            $('table#viewTable td.del').click(tableRowDelClick);
+        }, "get_expenses", requestParams);
+    });
+</script>

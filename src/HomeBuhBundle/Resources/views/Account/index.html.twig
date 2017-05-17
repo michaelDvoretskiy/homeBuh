@@ -9,7 +9,10 @@
 {% endblock %}
 
 {% block content_block %}
-    {{ render(path("get_content", {'activeMenu': activeMenu})) }}
+    <div class = 'content'>
+        {{ render(path("get_content", {'activeMenu': activeMenu})) }}
+        {#{{ render(path("get_content", {'activeMenu': ''})) }}#}
+    </div>
 {% endblock %}
 
 {% block js_after_block %}

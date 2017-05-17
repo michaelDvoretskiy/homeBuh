@@ -23,11 +23,10 @@ class UserUtil
 
         return $User;
     }
-    private static function getUserCategories(Container $container, User $user)
+    public static function getUserCategories(Container $container, User $user)
     {
         return $container
             ->get("doctrine")
-            ->getEntityManager()
             ->getRepository("HomeBuhBundle:Category")
             ->getCategories($user);
     }
@@ -40,11 +39,10 @@ class UserUtil
         }
         return $categories;
     }
-    private static function getUserPaymentTypes(Container $container, User $user)
+    public static function getUserPaymentTypes(Container $container, User $user)
     {
         return $container
             ->get("doctrine")
-            ->getEntityManager()
             ->getRepository("HomeBuhBundle:Account")
             ->getAccounts($user);
     }
@@ -57,4 +55,10 @@ class UserUtil
         }
         return $accounts;
     }
+    public static function getUserExpenses(Container $container, User $user, $dateFrom, $dateTo) {
+        return $container
+            ->get("doctrine")
+            ->getRepository("HomeBuhBundle:Expense")
+            ->getExpenses($user, $dateFrom, $dateTo);
+    } 
 }

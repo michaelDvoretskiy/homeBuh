@@ -1,0 +1,19 @@
+{% set curdata = '' %}
+{% for expense in data %}
+    {% if ((expense.data|date('d.m.Y')) != curdata) %}
+        <tr>
+            <th colspan="4">
+                {{ expense.data|date('d.m.Y') }}
+            </th>
+        </tr>
+        {% set curdata = (expense.data|date('d.m.Y')) %}
+
+    {% endif %}
+    <tr class = "row">
+        <td>{{ expense.cat }}</td>
+        <td>{{ expense.account }}</td>
+        <td>{{ expense.text }}</td>
+        <td class = "del" dbrowid = "{{ expense.id }}">
+            {{ expense.summa }}
+        </td></tr>
+{% endfor %}

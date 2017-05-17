@@ -1,0 +1,30 @@
+{% macro my_form_begin(form) %}
+    {{ form_start(form) }}
+    <div class = "tableView">
+{% endmacro %}
+
+{% macro my_form_end(form) %}
+    </div>
+    {{ form_end(form) }}
+{% endmacro %}
+
+{% macro my_form_row(elem, value = false) %}
+    <div class = "rowView">
+        <div class = "cellView">
+            {{ form_label(elem) }}
+        </div>
+        <div class = "cellView">
+            {% if(value) %}
+                {{ form_widget(elem, {'attr': {'value': value }}) }}
+            {% else %}
+                {{ form_widget(elem) }}
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro my_form_submit_btn(btn) %}
+    <div class = "lastRowView">
+        {{ form_widget(btn) }}
+    </div>
+{% endmacro %}

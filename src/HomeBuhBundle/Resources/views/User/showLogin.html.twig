@@ -1,40 +1,16 @@
 {% extends '@HomeBuh/layout.html.twig' %}
 {% block content_block %}
-
+    {% import "@HomeBuh/formElements.html.twig" as forms %}
     {% if err %}
         <div>{{ err.messageKey|trans(err.messageData, 'security') }}</div>
     {% endif %}
 
-    {{ form_start(form) }}
+    {{ forms.my_form_begin(form) }}
 
-    <div class = "tableView">
-        <div class = "rowView">
-            <div class = "cellView">
-                {{ form_label(form.username) }}
-            </div>
-            <div class = "cellView">
-                {{ form_widget(form.username, {'attr': {'value': last_username }}) }}
-            </div>
-        </div>
-        <div class = "rowView">
-            <div class = "cellView">
-                {{ form_label(form.password) }}
-            </div>
-            <div class = "cellView">
-                {{ form_widget(form.password) }}
-            </div>
-        </div>
-        <div class = "lastRowView">
-            {{ form_widget(form.login) }}
-        </div>
-    </div>
-    {{ form_end(form) }}
-{% endblock %}
+    {{ forms.my_form_row(form.username, last_username) }}
+    {{ forms.my_form_row(form.password) }}
 
-{% block js_after_block %}
-    {#<script !src="">#}
-        {#$('#{{ form.login.vars['id'] }}').click(function() {#}
+    {{ forms.my_form_submit_btn(form.login) }}
 
-        {#});#}
-    {#</script>#}
+    {{ forms.my_form_end(form) }}
 {% endblock %}

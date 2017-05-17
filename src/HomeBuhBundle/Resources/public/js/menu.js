@@ -1,3 +1,20 @@
+var initContentFun = function(el) {
+    var elContent = $('section.main div.content');
+    fillElement(elContent, function() {
+        initElements();
+    }, "get_content", {'activeMenu': $(el).attr("id")});
+};
+
+var dependentMenuClickFun = function() {
+    var el = this;
+    $('nav.dependent li').removeClass('active');
+    $(el).addClass('active');
+
+    initContentFun(el);
+};
+
+$('nav.dependent li').click(dependentMenuClickFun);
+
 $('nav.main li').click(
     function() {
         var el = this;
@@ -9,22 +26,12 @@ $('nav.main li').click(
             $(location).attr('href', Routing.generate("get_dependent_menu",  {'activeMenu': $(el).attr("id")}))
         } else {
             $('nav.dependent').html("");
-            $.get(
-                Routing.generate("get_dependent_menu",  {'activeMenu': $(el).attr("id")}),
-                function(data, status) {
-                    if (status == "success") {
-                        $('nav.dependent').html(data);
-                        $('nav.dependent li').click(dependentMenuClickFun);
-                    }
-                }
-            );
+            var elDepMenu = $('nav.dependent');
+            fillElement(elDepMenu, function(){
+                $('nav.dependent li').click(dependentMenuClickFun);
+            }, "get_dependent_menu", {'activeMenu': $(el).attr("id")});
+
+            initContentFun(el);
         }
     }
 );
-
-var dependentMenuClickFun = function() {
-    var el = this;
-    $('nav.dependent li').removeClass('active');
-    $(el).addClass('active');
-};
-$('nav.dependent li').click(dependentMenuClickFun);    

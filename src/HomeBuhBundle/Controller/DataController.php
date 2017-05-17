@@ -1,0 +1,42 @@
+<?php
+
+namespace HomeBuhBundle\Controller;
+
+use HomeBuhBundle\Utils\UserUtil;
+use Proxies\__CG__\HomeBuhBundle\Entity\Expense;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class DataController extends Controller
+{
+    /**
+     * @param $datefrom
+     * @param $dateto
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("data/get/expenses/{datefrom}/{dateto}", name = "get_expenses", options={"expose"=true})
+     * @Template()
+     */
+    public function getExpensesAction($datefrom, $dateto)
+    {
+        $data = UserUtil::getUserExpenses($this->container, $this->getUser(), $datefrom, $dateto);
+        return ['data' => $data];
+    }
+
+    /**
+     * @param $id
+     * @return Response
+     * @Route("data/remove/expense/{expence_id}", name="remove_expense", options={"expose"=true})
+     */
+    public function delExpenseAction($expence_id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $exp = $em->getRepository("HomeBuhBundle:Expense")->find($expence_id);
+        if($exp) {
+            $em->remove($exp);
+            $em->flush();
+            return new Response("1");
+        }
+        return new Response("");
+    }
+}

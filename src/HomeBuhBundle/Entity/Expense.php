@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Expenses
  *
  * @ORM\Table(name="expenses", indexes={@ORM\Index(name="account", columns={"account"}), @ORM\Index(name="cat", columns={"cat"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ExpenseRepository")
  */
 class Expense
 {
@@ -50,9 +50,9 @@ class Expense
     private $id;
 
     /**
-     * @var \HomeBuhBundle\Entity\Account
+     * @var Account
      *
-     * @ORM\ManyToOne(targetEntity="Account.php")
+     * @ORM\ManyToOne(targetEntity="HomeBuhBundle\Entity\Account")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="account", referencedColumnName="id")
      * })
@@ -60,9 +60,9 @@ class Expense
     private $account;
 
     /**
-     * @var \HomeBuhBundle\Entity\Category
+     * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Category.php")
+     * @ORM\ManyToOne(targetEntity="HomeBuhBundle\Entity\Category")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cat", referencedColumnName="id")
      * })

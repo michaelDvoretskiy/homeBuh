@@ -18,3 +18,29 @@ Date.prototype.myMonthBeg = function() {
 Date.prototype.myMonthEnd = function() {
 	return new Date( this.getFullYear(), this.getMonth() + 1, 0);
 }
+
+//get html from some controller into element
+function fillElement(element, action, controller, options) {
+    $('nav.dependent').html("");
+    $.get(
+        Routing.generate(controller, options),
+        function(data, status) {
+            if (status == "success") {
+                element.html(data);
+                action();
+            } else {
+                element.html("recieving data was failed !");
+            }
+        }
+    );
+}
+
+//run command or something like this
+function doTheThing(action, controller, options) {
+    $.ajax({
+        url: Routing.generate(controller, options),
+        async: true,
+        success: action,
+        type: 'POST'
+    });
+}
