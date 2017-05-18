@@ -4,6 +4,7 @@ namespace HomeBuhBundle\Controller;
 
 use HomeBuhBundle\Entity\Expense;
 use HomeBuhBundle\Form\AddExpenseSumForm;
+use HomeBuhBundle\Form\ReportExpensesForm;
 use HomeBuhBundle\Form\ShowExpensesForm;
 use HomeBuhBundle\Utils\UserUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -53,6 +54,8 @@ class AccountController extends Controller
             $controller_name = 'get_new_expense_form';             
         } elseif ($activeMenu == "mnuView") {
             $controller_name =  'view_expenses';
+        } elseif ($activeMenu == "mnuReport") {
+            $controller_name =  'report_expenses';
         } else {
             $controller_name =  '';
         }
@@ -110,6 +113,23 @@ class AccountController extends Controller
      */
     public function viewExpensesAction() {
         $form = $this->createForm(ShowExpensesForm::class);
+        return [
+            'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @return Response
+     * @Route("forms/expenses/report", name = "report_expenses")
+     * @Template()
+     */
+    public function reportExpensesAction() {
+        $accList = array_merge(
+            ['0' => 'All types'],
+            UserUtil::getUserPaymentTypesForChoice($this->container, $this->getUser())
+        );
+
+        $form = $this->createForm(ReportExpensesForm::class, null, ['acctypes' => $accList]);
         return [
             'form' => $form->createView(),
         ];

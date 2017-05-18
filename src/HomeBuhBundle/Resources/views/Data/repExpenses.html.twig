@@ -1,0 +1,10 @@
+{% set summa = 0 %}
+{% for row in data %}
+    <tr class = "row">
+    <td>{{ row.name }}</td>
+    <td>{{ row.summa }}</td>
+    <td class = "drillDown" dbrowid = "{{ row.id }}"></td></tr>
+    {% set summa = summa + row.summa %}
+{% endfor %}
+
+<tr><th>Subtotal :</th><th class = "sum_all">{{ summa }}</th><th></th></tr>

@@ -1,0 +1,50 @@
+{% import "@HomeBuh/formElements.html.twig" as forms %}
+
+{{ forms.my_form_begin(form) }}
+<div class = "tableView">
+    {{ forms.my_form_row(form.beginDate) }}
+    {{ forms.my_form_row(form.endDate) }}
+    {{ forms.my_form_row(form.paymentType) }}
+
+    {{ forms.my_form_submit_btn(form.report) }}
+</div>
+
+<table id = "repTable">
+    <thead>
+    <th>Category</th>
+    <th>Sum</th>
+    <th>%</th>
+    </thead>
+    <tbody></tbody>
+</table>
+
+{{ forms.my_form_end(form) }}
+
+<script !src="">
+    function initElements() {
+        var now = new Date();
+        $('#report_expenses_form_beginDate').val(now.myMonthBeg().myFormat());
+        $('#report_expenses_form_endDate').val(now.myMonthEnd().myFormat());
+    }
+    $( window ).on( "load", function() {
+        initElements();
+    });
+
+    $('button#report_expenses_form_report').click(function() {
+        var elTableBody = $('table#repTable > tbody');
+        elTableBody.html("");
+        var requestParams = {
+            "datefrom": $('input#report_expenses_form_beginDate').val(),
+            "dateto": $('input#report_expenses_form_endDate').val(),
+            "acctype": $('select#report_expenses_form_paymentType').val()
+        };
+        fillElement(elTableBody, function(){
+            var summa = $('table#repTable > tbody tr > th.sum_all').html();
+            $('table#repTable > tbody tr.row').each(function(index) {
+                var pers = Math.round($($(this).children()[1]).html() / summa * 100) + "%";
+                $($(this).children()[2]).html(pers);
+            });
+        }, "get_expenses_report", requestParams);
+    });
+
+</script>

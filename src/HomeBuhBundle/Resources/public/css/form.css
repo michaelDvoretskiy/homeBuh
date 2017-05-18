@@ -50,16 +50,10 @@ form table th {
 	padding: 8px 5px;
 	background-color: #3c4b71
 }
-form table#viewTable tr:nth-child(odd) {
+form table tr:nth-child(odd) {
 	background-color: skyblue;
 }
-form table#viewTable tr:nth-child(even) {
-	background-color: #cad4ef;
-}
-form table#repTable > tbody > tr:nth-child(4n+1) {
-	background-color: skyblue;
-}
-form table#repTable > tbody > tr:nth-child(4n+3) {
+form table tr:nth-child(even) {
 	background-color: #cad4ef;
 }
 form table td {
