@@ -48,4 +48,27 @@ class ExpenseRepository extends EntityRepository
         return $query->getQuery()->getResult();
           //  ->createNativeQuery("select c.id, max(c.name) cat, sum(e.summa) summa from expenses e inner join categories c on e.cat = c.id where e.uid = 1 and e.data between '2017-05-01' and '2017-05-31' group by c.id order by 3 desc, 2")
     }
+
+    public function repExpensesDetails(User $user, $dateFrom, $dateTo, $accId, $catId) {
+        $query =  $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('e.data as dataex, e.summa, e.text')
+            ->from("HomeBuhBundle:Expense", "e")
+            ->leftJoin("e.cat","c")
+            ->where("e.data between :datefrom and :dateto")
+            ->andWhere("e.uid = :uid")
+            ->andWhere("c.id = :catId")
+            ->setParameter("datefrom", $dateFrom)
+            ->setParameter("dateto", $dateTo)
+            ->setParameter("catId", $catId)
+            ->setParameter("uid", $user->getId());
+        if ($accId) {
+            $query->andWhere("e.account = :acc")
+                ->setParameter("acc", $accId);
+        }
+        $query->orderBy('e.data', 'desc');
+
+        return $query->getQuery()->getResult();
+        //  ->createNativeQuery("select c.id, max(c.name) cat, sum(e.summa) summa from expenses e inner join categories c on e.cat = c.id where e.uid = 1 and e.data between '2017-05-01' and '2017-05-31' group by c.id order by 3 desc, 2")
+    }
 }

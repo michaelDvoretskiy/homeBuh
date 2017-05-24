@@ -1,0 +1,11 @@
+{% set summa = 0 %}
+{% for row in data %}
+    <tr class = "row">
+        <td>{{ row.dataex|date('d.m.Y') }}</td>
+        <td>{{ row.summa }}</td>
+        <td>{{ row.text }}</td>
+    </tr>
+    {% set summa = summa + row.summa %}
+{% endfor %}
+
+<tr><th>Total :</th><th class = "sum_all">{{ summa }}</th><th></th></tr>

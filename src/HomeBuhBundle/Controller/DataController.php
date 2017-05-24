@@ -55,4 +55,21 @@ class DataController extends Controller
             'data' => $repResult,
         ];
     }
+
+    /**
+     * @param $datefrom
+     * @param $dateto
+     * @param $acctype
+     * @param $category
+     * @return Response
+     * @Route("data/get/expenses_details/{datefrom}/{dateto}/{acctype}/{category}", name = "get_expenses_report_details", options={"expose"=true})
+     * @Template()
+     */
+    public function repExpensesDetailAction($datefrom, $dateto, $acctype, $category) {
+        $repResult = $this->getDoctrine()->getRepository("HomeBuhBundle:Expense")
+            ->repExpensesDetails($this->getUser(), $datefrom, $dateto, $acctype, $category);
+        return [
+            'data' => $repResult,
+        ];
+    }
 }

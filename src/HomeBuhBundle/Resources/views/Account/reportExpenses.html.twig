@@ -18,8 +18,11 @@
     <tbody></tbody>
 </table>
 
+{% include "@HomeBuh/Modals/repDetail.html.twig" %}
+
 {{ forms.my_form_end(form) }}
 
+<script src="{{ asset('bundles/homebuh/js/modal_form.js') }}"></script>
 <script !src="">
     function initElements() {
         var now = new Date();
@@ -44,7 +47,30 @@
                 var pers = Math.round($($(this).children()[1]).html() / summa * 100) + "%";
                 $($(this).children()[2]).html(pers);
             });
+
+            $('table#repTable td.drillDown').click(function() {
+                fillDetailReportTable(requestParams, $(this).attr("dbrowid"));
+                openModalForm();
+            });
+
         }, "get_expenses_report", requestParams);
     });
 
+    function fillDetailReportTable(requestParams, category) {
+        var detailRequestParams = {
+            "datefrom": requestParams.datefrom,
+            "dateto": requestParams.dateto,
+            "acctype": requestParams.acctype,
+            "category": category
+        };
+        var elTableDetailBody = $('table#ExpenceDetails > tbody');
+        elTableDetailBody.html("");
+        fillElement(elTableDetailBody, function(){
+
+        }, "get_expenses_report_details", detailRequestParams);
+    }
+
+    $('#modal_close, #overlay').click( function() {
+        closeModalForm();
+    });
 </script>

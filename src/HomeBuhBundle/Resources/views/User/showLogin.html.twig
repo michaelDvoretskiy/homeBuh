@@ -6,11 +6,11 @@
     {% endif %}
 
     {{ forms.my_form_begin(form) }}
-
+    <div class = "tableView">
     {{ forms.my_form_row(form.username, last_username) }}
     {{ forms.my_form_row(form.password) }}
 
     {{ forms.my_form_submit_btn(form.login) }}
-
+    </div>
     {{ forms.my_form_end(form) }}
 {% endblock %}
