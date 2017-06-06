@@ -11,11 +11,12 @@
             <link rel="stylesheet" type="text/css" href={{ asset("bundles/homebuh/css/page.css") }}>
             <link rel="stylesheet" type="text/css" href={{ asset("bundles/homebuh/css/menu.css") }}>
             <link rel="stylesheet" type="text/css" href={{ asset("bundles/homebuh/css/form.css") }}>
+            <link rel="stylesheet" type="text/css" href={{ asset('css/datatables.min.css') }}>
         {% endblock %}
 
         {% block js_pre_block %}
             <script type="text/javascript" src = {{ asset("js/jquery.js") }}></script>
-
+            <script type="text/javascript" src = {{ asset('js/datatables.min.js') }}></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 

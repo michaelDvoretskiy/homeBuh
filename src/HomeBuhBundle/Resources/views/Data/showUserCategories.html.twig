@@ -1,0 +1,29 @@
+<table id="categoryTable">
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Order</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>Category</th>
+        <th>Order</th>
+        <th>Actions</th>
+    </tr>
+    </tfoot>
+    {% for cat in data %}
+    <tr>
+        <td>{{ cat.name }}</td>
+        <td>{{ cat.ord }}</td>
+        <td></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<script !src="">
+    $(document).ready(function() {
+        $('#categoryTable').DataTable();
+    });
+</script>

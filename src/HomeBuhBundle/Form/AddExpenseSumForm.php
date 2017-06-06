@@ -59,6 +59,7 @@ class AddExpenseSumForm extends AbstractType
                 [
                     'label' => 'Comment: ',
                     'property_path' => 'text',
+                    'required' => false,
                 ]
             )
             ->add(

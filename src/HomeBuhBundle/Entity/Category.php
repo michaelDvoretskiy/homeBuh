@@ -22,7 +22,7 @@ class Category
     /**
      * @var boolean
      *
-     * @ORM\Column(name="ord", type="boolean", nullable=false)
+     * @ORM\Column(name="ord", type="smallint", nullable=false)
      */
     private $ord;
 

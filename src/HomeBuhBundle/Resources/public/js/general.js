@@ -21,7 +21,7 @@ Date.prototype.myMonthEnd = function() {
 
 //get html from some controller into element
 function fillElement(element, action, controller, options) {
-    $('nav.dependent').html("");
+    //$('nav.dependent').html("");
     $.get(
         Routing.generate(controller, options),
         function(data, status) {

@@ -22,9 +22,9 @@ class Expense
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="string", length=50, nullable=false)
+     * @ORM\Column(name="text", type="string", length=50, nullable=false, options={"default" : ""})
      */
-    private $text;
+    private $text = '';
 
     /**
      * @var integer
@@ -100,8 +100,11 @@ class Expense
      * @param string $text
      * @return Expense
      */
-    public function setText($text)
+    public function setText($text = '')
     {
+        if (!$text) {
+            $text = '';
+        }
         $this->text = $text;
 
         return $this;
@@ -217,5 +220,14 @@ class Expense
     public function getCat()
     {
         return $this->cat;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    function onPrePersist() {
+        if (!$this->getText()) {
+            $this->setText();
+        }
     }
 }

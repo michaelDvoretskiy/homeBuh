@@ -4,6 +4,7 @@ namespace HomeBuhBundle\Controller;
 
 use HomeBuhBundle\Entity\Expense;
 use HomeBuhBundle\Form\AddExpenseSumForm;
+use HomeBuhBundle\Form\ChangePassword;
 use HomeBuhBundle\Form\ReportExpensesForm;
 use HomeBuhBundle\Form\ShowExpensesForm;
 use HomeBuhBundle\Utils\UserUtil;
@@ -11,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AccountController extends Controller
@@ -20,12 +22,19 @@ class AccountController extends Controller
      * @Route("/", name = "account")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $activeMenu = "mnuAdd";
+        $sess = $request->getSession();
+        if ($sess->has('activeMenu')) {
+            $activeMenu = $sess->get('activeMenu');
+            $sess->remove('activeMenu');
+        }
         return [
-            'activeMenu' => 'mnuAdd',
+            'activeMenu' => $activeMenu,
         ];
     }
+
     /**
      * @param $activeMenu
      * @return \Symfony\Component\HttpFoundation\Response
@@ -33,7 +42,7 @@ class AccountController extends Controller
      */
     public function depMenuAction($activeMenu)
     {
-        if ($activeMenu == "mnuOption") {
+        if (in_array($activeMenu, ['mnuOption','mnuPWD','mnuEditCat','mnuEditAcc'])) {
             return $this->render("@HomeBuh/Account/optionsMenu.html.twig");    
         }
         if ($activeMenu == "mnuLogout") {
@@ -56,6 +65,10 @@ class AccountController extends Controller
             $controller_name =  'view_expenses';
         } elseif ($activeMenu == "mnuReport") {
             $controller_name =  'report_expenses';
+        } elseif ($activeMenu == "mnuOption" || $activeMenu == "mnuPWD") {
+            $controller_name =  'change_password';
+        } elseif ($activeMenu == "mnuEditCat") {
+            $controller_name =  'get_categories';
         } else {
             $controller_name =  '';
         }
@@ -93,7 +106,6 @@ class AccountController extends Controller
         if ($form->isSubmitted()) {
             $expense = $form->getData();
             $expense->setUid($this->getUser()->getId());
-
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($expense);
             $em->flush();
@@ -130,6 +142,40 @@ class AccountController extends Controller
         );
 
         $form = $this->createForm(ReportExpensesForm::class, null, ['acctypes' => $accList]);
+        return [
+            'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @return Response
+     * @Route("forms/password/change", name = "change_password")
+     * @Template()
+     */
+    public function changePasswordAction(Request $request) {
+        $sess = $request->getSession();
+
+        $form = $this->createForm(ChangePassword::class, null, ['action' => $this->generateUrl("change_password")]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $data = $form->getData();
+            $encoder = $this->container->get('security.password_encoder');
+            $User = $this->getUser();
+            if ($form->isValid()) {
+                if ($data['newPass'] == $data['newPass2']) {
+                    $newPass = $encoder->encodePassword($User, $data['newPass']);
+                    $User->setPassword($newPass);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($User);
+                    $em->flush();
+                    return $this->redirectToRoute("account");
+                }
+            }
+            $sess->set('activeMenu', 'mnuPWD');
+            return $this->redirectToRoute("account");
+        }
+
         return [
             'form' => $form->createView(),
         ];

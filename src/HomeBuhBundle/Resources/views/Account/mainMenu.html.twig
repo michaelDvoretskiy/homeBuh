@@ -1,9 +1,18 @@
 <nav class = "main">
     <ul>
-        <li class = "active" id = "mnuAdd">Add</li>
+        <li id = "mnuAdd">Add</li>
         <li id = "mnuView">View</li>
         <li id = "mnuReport">Rep</li>
         <li id = "mnuOption">Opt</li>
         <li id = "mnuLogout">Logout</li>
     </ul>
 </nav>
+{% set selectMenu = activeMenu %}
+{% if selectMenu in ['mnuPWD', 'mnuEditCat', 'mnuEditAcc'] %}
+    {% set selectMenu = 'mnuOption' %}
+{% endif %}
+<script !src="">
+    $('nav.main li').removeClass('active');
+
+    $({{ selectMenu }}).addClass('active');
+</script>

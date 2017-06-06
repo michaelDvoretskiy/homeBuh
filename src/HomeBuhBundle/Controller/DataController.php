@@ -72,4 +72,20 @@ class DataController extends Controller
             'data' => $repResult,
         ];
     }
+
+    /**
+     * @return Response
+     * @Route("data/get/categories", name = "get_categories")
+     * @Template()
+     */
+    public function showUserCategoriesAction() {
+        $data = [
+            ['name' => 'vasya', 'ord' => '1'],
+            ['name' => 'katya', 'ord' => '2'],
+        ];
+        $data = UserUtil::getUserCategories($this->container, $this->getUser());
+        return [
+            'data' => $data,
+        ];
+    }
 }

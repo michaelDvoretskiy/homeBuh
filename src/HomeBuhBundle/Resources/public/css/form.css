@@ -13,6 +13,10 @@ input, select, button {
 	border-radius: 5px;
 	padding: 8px 3px;
 }
+div[id*="Table_length"] select {
+	width: 70px;
+}
+
 input[type = number] {
 	text-align: center;
 }
@@ -137,4 +141,7 @@ form table#repTable td.innerTable table.inner td {
 }
 #modal_form #modal_content {
 	margin-top: 25px;
+	width: 100%;
+	height: 95%;
+	overflow-y: scroll;
 }
